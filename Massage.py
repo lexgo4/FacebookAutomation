@@ -189,7 +189,6 @@ def run(febu_bot_: FacebookBot, feed_box_aria_):
     i = 1
     for li in comments:
         print()
-        print()
         print(f"========> Now in number {i} thread {emoji.emojize(':smirking_face:')} <========")
         message = random.choice(messages)
         if isYourPage:
@@ -229,6 +228,7 @@ def run(febu_bot_: FacebookBot, feed_box_aria_):
         print(f"========> {emoji.emojize(':watermelon:')} Thread {i} is completed <========")
         i += 1
         time.sleep(5)
+        print()
 
 
 if __name__ == '__main__':
@@ -249,6 +249,7 @@ if __name__ == '__main__':
     is2FA = bool(int(input('#### Do you need 2FA? type 1 for yes and 0 for no: ')))
     isYourPage = bool(int(input('#### Is this your page? type 1 for yes and 0 for no: ')))
     isCookieAsked = bool(int(input('#### Is this your cookie is been asked? type 1 for yes and 0 for no: ')))
+    isSilent = bool(int(input('#### Do you want to run this silently? type 1 for yes and 0 for no: ')))
 
     username = os.environ.get('my_facebook_username')
     password = os.environ.get('my_facebook_password')
@@ -270,7 +271,6 @@ if __name__ == '__main__':
 
     time.sleep(2)
 
-
     feed_box_aria = febu_bot.driver.find_element_by_xpath("//div[@data-testid='Keycommand_wrapper_feed_story']")
 
     comments_button = "//div[@aria-label='Leave a comment']"
@@ -284,7 +284,7 @@ if __name__ == '__main__':
     while True:
         print(f"==========> Executing {1} <============")
 
-        if i > 1:
+        if i > 1 and isSilent is False:
             febu_bot.driver.execute_script('window.alert("Click ok then in command ans. question to load more comments '
                                            'and run again");')
             load_more = bool(int(input("#### Load more comments? type 1 for yes and 0 for no: ")))
